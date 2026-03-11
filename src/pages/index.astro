@@ -23,7 +23,7 @@ const values = [
     <div class="hero-content">
       <div class="container">
         <div class="hero-text">
-          <h1>Welcome to<br /><em>Sand Hill Equestrian Events</em></h1>
+          <h1><em>Sand Hill<br />Equestrian Events</em></h1>
           <p class="hero-sub">
             Hunter/jumper and dressage shows<br />for every level of rider.
           </p>
@@ -109,19 +109,20 @@ const values = [
     margin-left: auto;
     max-width: 380px;
     text-align: right;
-    padding-right: 1rem;
+    padding-right: 0;
   }
 
   .hero h1 {
-    color: var(--color-white);
-    font-size: clamp(2.25rem, 4vw, 3.75rem);
-    line-height: 1.15;
+    color: var(--color-gold);
+    font-size: clamp(2.75rem, 5vw, 4.5rem);
+    font-style: italic;
+    line-height: 1.1;
     margin-bottom: 1rem;
   }
 
   .hero h1 em {
-    font-style: italic;
-    color: var(--color-gold);
+    font-style: inherit;
+    color: inherit;
     display: block;
   }
 
@@ -268,7 +269,7 @@ const values = [
     }
 
     .hero h1 {
-      font-size: clamp(1.75rem, 7vw, 2.5rem);
+      font-size: clamp(2rem, 8vw, 3rem);
     }
 
     .hero-sub {
