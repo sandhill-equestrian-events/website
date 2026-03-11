@@ -1,11 +1,301 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import InstagramGrid from '../components/InstagramGrid.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const values = [
+  { title: "Community", description: "We believe the barn aisle is better when everyone feels welcome." },
+  { title: "Learning", description: "Compete with USEF judges in a community that grows with you." },
+  { title: "Celebration", description: "Celebrate the journey as much as the result." },
+  { title: "Growth", description: "We're building a stronger horse community, one show at a time." },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Sand Hill Equestrian Events">
+  <Nav />
+
+  <main id="main-content">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="container">
+        <div class="hero-text">
+          <h1>Welcome to<br /><em>Sand Hill Equestrian Events</em></h1>
+          <p class="hero-sub">
+            Hunter/jumper and dressage shows<br />for every level of rider.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="mission gold-divider">
+    <div class="container">
+      <div class="mission-text fade-in">
+        <p class="label">Who We Are</p>
+        <h2>Growing the Horse Community</h2>
+        <p>
+          Sand Hill Equestrian Events produces hunter/jumper and dressage shows
+          in Northern California, built around the idea that everyone deserves
+          access to high-quality show experiences.
+        </p>
+        <p>
+          Since 2021, we've brought USEF judges and first-class facilities to
+          unrated competition, so riders at every level can compete with confidence.
+        </p>
+      </div>
+    </div>
+    <div class="value-banners fade-in-stagger">
+      {values.map((v) => (
+        <div class="pennant-wrapper fade-in">
+          <div class="value-banner">
+            <p class="value-title">{v.title}</p>
+            <p class="value-desc">{v.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <InstagramGrid />
+  </main>
+  <Footer />
 </Layout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hero.jpg');
+    background-size: cover;
+    background-position: 35% 30%;
+    background-repeat: no-repeat;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to left,
+      rgba(10, 25, 15, 0.88) 0%,
+      rgba(10, 25, 15, 0.62) 28%,
+      rgba(10, 25, 15, 0.22) 48%,
+      rgba(10, 25, 15, 0.04) 62%,
+      transparent 72%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-block: var(--space-lg);
+  }
+
+  .hero-text {
+    margin-left: auto;
+    max-width: 380px;
+    text-align: right;
+    padding-right: 1rem;
+  }
+
+  .hero h1 {
+    color: var(--color-white);
+    font-size: clamp(2.25rem, 4vw, 3.75rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--color-gold);
+    display: block;
+  }
+
+  .hero-sub {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin-left: auto;
+  }
+
+  /* ── Mission ── */
+  .mission {
+    background-color: var(--color-cream);
+    padding-top: var(--space-lg);
+    padding-bottom: 0;
+  }
+
+  .mission-text {
+    max-width: 640px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .mission-text .label {
+    margin-bottom: 0.75rem;
+  }
+
+  .mission-text h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .mission-text p + p {
+    margin-top: 1rem;
+  }
+
+  /* ── Value Pennants ── */
+  .value-banners {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: var(--space-sm) 0 var(--space-md);
+  }
+
+  .pennant-wrapper {
+    position: relative;
+    padding-top: 16px;
+  }
+
+  /* Strings */
+  .pennant-wrapper::before,
+  .pennant-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    width: 1.5px;
+    height: 13px;
+    background: var(--color-sage);
+    opacity: 0.35;
+  }
+
+  .pennant-wrapper::before {
+    left: calc(50% - 40px);
+    transform: rotate(-20deg);
+  }
+
+  .pennant-wrapper::after {
+    left: calc(50% + 39px);
+    transform: rotate(20deg);
+  }
+
+  .value-banner {
+    background: linear-gradient(
+      to bottom,
+      var(--color-gold) 0px,
+      var(--color-gold) 5px,
+      var(--color-green) 5px
+    );
+    color: var(--color-white);
+    padding: 2.5rem 2rem 3.5rem;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 32px), 50% 100%, 0 calc(100% - 32px));
+  }
+
+  .value-title {
+    font-family: 'Barlow Condensed', var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 300;
+    font-style: normal;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+    text-shadow:
+      2px 2px 0 #0d2518,
+      4px 4px 0 rgba(13, 37, 24, 0.45);
+  }
+
+  .value-desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 28ch;
+    margin: 0 auto;
+  }
+
+  /* ── Tablet ── */
+  @media (max-width: 1023px) {
+    .value-banners {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .hero {
+      min-height: 70vh;
+    }
+
+    .hero-image {
+      background-position: center 30%;
+    }
+
+    .hero-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(10, 25, 15, 0.9) 0%,
+        rgba(10, 25, 15, 0.6) 40%,
+        rgba(10, 25, 15, 0.2) 70%,
+        transparent 100%
+      );
+    }
+
+    .hero-text {
+      width: 100%;
+      text-align: center;
+      margin-left: 0;
+      padding-right: 0;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: flex-end;
+      min-height: 70vh;
+      padding-bottom: var(--space-lg);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.75rem, 7vw, 2.5rem);
+    }
+
+    .hero-sub {
+      margin-left: 0;
+    }
+
+    .value-banners {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .value-banner {
+      padding: 1.75rem 1.25rem 2.5rem;
+    }
+
+    .value-title {
+      font-size: 1.5rem;
+    }
+
+    .value-desc {
+      font-size: 0.8125rem;
+    }
+
+    .value-title {
+      text-shadow:
+        1px 1px 0 #0d2518,
+        2px 2px 0 rgba(13, 37, 24, 0.45);
+    }
+  }
+</style>

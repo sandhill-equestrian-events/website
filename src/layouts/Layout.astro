@@ -1,23 +1,309 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Sand Hill Equestrian Events",
+  description = "Growing the horse community through premier unrated hunter/jumper and dressage shows in Northern California.",
+  image = "/images/hero.jpg",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://sandhillequestrianevents.com");
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#1B3D2A" />
+    <link rel="preload" as="image" href="/images/hero.jpg" />
+    <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, canonicalURL)} />
+    <meta property="og:site_name" content="Sand Hill Equestrian Events" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, canonicalURL)} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Barlow+Condensed:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <slot />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  /* ── Color Tokens ── */
+  :root {
+    --color-green:        #1B3D2A;
+    --color-green-light:  #2A5240;
+    --color-sage:         #8FA67A;
+    --color-sage-dark:    #5C7048;
+    --color-sage-mist:    #D4DCCC;
+    --color-gold:         #C9A84C;
+    --color-terracotta:   #B89080;
+    --color-white:        #FFFFFF;
+    --color-cream:        #F5F0E8;
+    --color-ink:          #1A1E12;
+    --color-gold-dark:    #B8952A;
+    --color-ink-soft:     #4A4A42;
+
+    /* ── Typography Tokens ── */
+    --font-display:   'Playfair Display', Georgia, serif;
+    --font-body:      'DM Sans', system-ui, sans-serif;
+
+    /* ── Spacing ── */
+    --space-xs:   0.5rem;
+    --space-sm:   1rem;
+    --space-md:   2rem;
+    --space-lg:   4rem;
+    --space-xl:   8rem;
+
+    /* ── Max width ── */
+    --max-width: 1200px;
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--color-ink);
+    background-color: var(--color-cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Typography Base ── */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    color: var(--color-green);
+  }
+
+  h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; }
+  h2 { font-size: clamp(2rem, 4vw, 3rem);   font-weight: 700; }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-ink-soft);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* ── Focus styles (keyboard accessibility) ── */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+
+  /* Invert focus ring on dark backgrounds */
+  nav :focus-visible,
+  .page-hero :focus-visible,
+  footer :focus-visible {
+    outline-color: var(--color-gold);
+  }
+
+  /* ── Screen-reader only ── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Skip link ── */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-gold);
+    color: var(--color-green);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0 0 4px 4px;
+    z-index: 200;
+    text-decoration: none;
+    transition: top 0.2s;
+  }
+
+  .skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+
+  /* ── Utility: label/tag style ── */
+  .label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-sage-dark);
+  }
+
+  /* ── Utility: container ── */
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+  }
+
+  /* ── Button ── */
+  .btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .btn-primary {
+    background-color: var(--color-gold);
+    color: var(--color-green);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-gold-dark);
+  }
+
+  .btn-primary:active {
+    background-color: var(--color-gold-dark);
+    transform: translateY(1px);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  /* ── Gold accent divider ── */
+  .gold-divider {
+    position: relative;
+  }
+
+  .gold-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-gold);
+  }
+
+  /* ── Scroll animations ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children */
+  .fade-in-stagger > .fade-in:nth-child(2) { transition-delay: 0.1s; }
+  .fade-in-stagger > .fade-in:nth-child(3) { transition-delay: 0.2s; }
+  .fade-in-stagger > .fade-in:nth-child(4) { transition-delay: 0.3s; }
+  .fade-in-stagger > .fade-in:nth-child(5) { transition-delay: 0.4s; }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 767px) {
+    :root {
+      --space-lg: 2.5rem;
+      --space-md: 1.25rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
 </style>

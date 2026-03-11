@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import InstagramGrid from '../components/InstagramGrid.astro';
+---
+
+<Layout title="News & Updates — Sand Hill Equestrian Events" description="The latest news, updates, and announcements from Sand Hill Equestrian Events and the Woodside Show Series.">
+  <Nav />
+
+  <main id="main-content">
+  <section class="page-hero">
+    <div class="container">
+      <p class="label">Stay in the Loop</p>
+      <h1>News & Updates</h1>
+      <p class="page-sub">
+        Keep up with show announcements, schedule updates, and the latest
+        from Sand Hill Equestrian Events.
+      </p>
+    </div>
+  </section>
+
+  <InstagramGrid />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-green);
+    padding-block: var(--space-lg);
+  }
+
+  .page-hero .label {
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-hero h1 {
+    color: var(--color-white);
+    margin-bottom: 1rem;
+  }
+
+  .page-sub {
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 52ch;
+    font-size: 1.0625rem;
+  }
+</style>

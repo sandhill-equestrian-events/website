@@ -1,0 +1,96 @@
+---
+---
+
+<section class="instagram-section gold-divider">
+  <div class="container instagram-header">
+    <p class="label">Follow Along</p>
+    <a href="https://www.instagram.com/woodsideshowseries/" target="_blank" rel="noopener noreferrer" class="instagram-handle">
+      @woodsideshowseries <span class="sr-only">(opens in new tab)</span>
+    </a>
+  </div>
+  <div class="instagram-widget">
+    <behold-widget feed-id="TNdBqpemB0HurWdJ8UvI"></behold-widget>
+    <noscript>
+      <p class="instagram-fallback">
+        <a href="https://www.instagram.com/woodsideshowseries/" target="_blank" rel="noopener noreferrer">
+          Visit us on Instagram →
+        </a>
+      </p>
+    </noscript>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const d = document, s = d.createElement("script");
+    s.type = "module";
+    s.src = "https://w.behold.so/widget.js";
+    d.head.append(s);
+  })();
+</script>
+
+<style>
+  .instagram-section {
+    background-color: var(--color-cream);
+    padding-top: var(--space-lg);
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  .instagram-header {
+    text-align: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .instagram-header .label {
+    margin-bottom: 0.5rem;
+  }
+
+  .instagram-handle {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: var(--color-green);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .instagram-handle:hover {
+    color: var(--color-gold);
+  }
+
+  .instagram-widget {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    min-height: 300px;
+  }
+
+  .instagram-fallback {
+    text-align: center;
+    padding: var(--space-md);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .instagram-fallback a {
+    color: var(--color-green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .instagram-fallback a:hover {
+    color: var(--color-gold);
+  }
+
+</style>
+
+<style is:global>
+  behold-widget {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+</style>

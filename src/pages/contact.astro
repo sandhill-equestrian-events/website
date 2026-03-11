@@ -1,0 +1,488 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const team = [
+  {
+    name: "Molly Kaster",
+    role: "Owner & Show Manager",
+    image: "/images/molly-team-photo.jpg",
+    phone: null,
+    email: null,
+    bio: "Founder of Sand Hill Equestrian Events and a lifelong advocate for accessible, high-quality horse shows. Outside the office, she's riding Joey or running with her dog, Doug.",
+  },
+  {
+    name: "Elizabeth Schaffernoth",
+    role: "Show Secretary",
+    image: "/images/elizabeth-team-photo.jpg",
+    phone: null,
+    email: null,
+    bio: "The detail expert behind entries, schedules, and show-day communication. She rides in the eventing world and is never far from her dog, Piper.",
+  },
+  {
+    name: "Caroline Jack",
+    role: "Office Manager",
+    image: "/images/caroline-team-photo.jpg",
+    phone: null,
+    email: null,
+    bio: "Has been with the show from day one, keeping every detail on track from ribbons to shavings. She rides her mare, Sage, and has three dogs at home: Hunter, Percy, and Frankie.",
+  },
+  {
+    name: "Charlotte Holt",
+    role: "Creative & Operations",
+    image: "/images/charlotte-team-photo.jpg",
+    phone: null,
+    email: null,
+    bio: "Handles our prize list, website, and behind-the-scenes logistics. A North Carolina native who grew up eventing and is working toward the jumper ring.",
+  },
+  {
+    name: "Carie Van Dusen",
+    role: "Grounds & Hospitality",
+    image: "/images/carie-team-photo.jpg",
+    phone: null,
+    email: null,
+    bio: "The eye behind our show grounds, from jump flowers to the office deck. A longtime horsewoman, she now rides Cloudy.",
+  },
+];
+---
+
+<Layout title="Contact — Sand Hill Equestrian Events" description="Get in touch with Sand Hill Equestrian Events. Questions about entries, stabling, volunteering, or sponsorship? We're here to help." image="/images/line-up-photo.jpg">
+  <Nav />
+
+  <main id="main-content">
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="label">Reach Out</p>
+      <h1>Contact Us</h1>
+      <p class="page-sub">
+        Questions about entries, stabling, volunteering, or sponsorship?
+        We're here to help.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="contact-section gold-divider">
+    <div class="container contact-grid fade-in">
+      <div class="contact-block">
+        <p class="label">General Inquiries</p>
+        <p class="contact-email-text">entries.woodsideschoolingshows@gmail.com</p>
+        <a href="mailto:entries.woodsideschoolingshows@gmail.com" class="btn btn-primary">
+          Email Us
+        </a>
+      </div>
+
+      <div class="contact-block">
+        <p class="label">Location</p>
+        <p class="location-series">Woodside Show Series</p>
+        <div class="location-row">
+          <address>
+            <a href="https://maps.google.com/?q=The+Horse+Park+at+Woodside,+3674+Sand+Hill+Road,+Woodside,+CA+94062" target="_blank" rel="noopener noreferrer" class="address-link">
+              The Horse Park at Woodside<br />
+              3674 Sand Hill Road<br />
+              Woodside, CA 94062
+              <span class="sr-only">(opens in new tab)</span>
+            </a>
+          </address>
+          <img src="/images/wss-logo-black.png" alt="Woodside Show Series" class="location-logo" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo -->
+  <div class="photo-band">
+    <img src="/images/line-up-photo.jpg" alt="Horses lined up at Woodside Show Series" loading="lazy" />
+  </div>
+
+  <!-- Volunteer -->
+  <section class="volunteer-section gold-divider">
+    <div class="container">
+      <div class="volunteer-inner fade-in">
+        <p class="label">Get Involved</p>
+        <h2>Volunteer Opportunities</h2>
+        <p>
+          Our shows come to life because of our volunteers. Whether
+          you're a lifelong equestrian or simply love horses, there's a
+          meaningful role for you, from dressage scribing to the show office.
+        </p>
+        <p>
+          No experience is necessary, just enthusiasm and a willingness to
+          be part of something special. We offer flexible time slots
+          throughout the weekend to fit your schedule.
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfaRClAQxnGUhlgvyuZ7mqCGHj3gUlqiiFRMf6z809bP69OnQ/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Sign up to volunteer <span class="sr-only">(opens in new tab)</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="team-section gold-divider">
+    <div class="container">
+      <p class="label">The Team</p>
+      <h2>Meet Sand Hill Equestrian</h2>
+    </div>
+    <div class="team-grid fade-in-stagger">
+      {team.map((member) => (
+        <div class="pennant-wrapper fade-in">
+          <div class="team-card">
+            {member.image
+              ? <div class="team-photo-wrap"><img src={member.image} alt={member.name} class="team-avatar-photo" loading="lazy" /></div>
+              : <div class="team-avatar" aria-hidden="true">
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </div>
+            }
+            <div class="team-info">
+              <h3>{member.name}</h3>
+              {member.role && <p class="label team-role">{member.role}</p>}
+              {member.bio && <p class="team-bio">{member.bio}</p>}
+              {member.phone && (
+                <a href={`tel:${member.phone.replace(/\D/g, '')}`} class="contact-link">
+                  {member.phone}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ── Page Hero ── */
+  .page-hero {
+    background-color: var(--color-green);
+    padding-block: var(--space-lg);
+  }
+
+  .page-hero .label {
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-hero h1 {
+    color: var(--color-white);
+    margin-bottom: 1rem;
+  }
+
+  .page-sub {
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 52ch;
+    font-size: 1.0625rem;
+  }
+
+  /* ── Contact Info Section ── */
+  .contact-section {
+    padding-block: var(--space-md);
+    background-color: var(--color-cream);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    align-items: start;
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .contact-email-text {
+    font-size: 1.0625rem;
+    color: var(--color-ink-soft);
+    word-break: break-all;
+  }
+
+  .location-series {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-green);
+    margin-bottom: 0;
+  }
+
+  .location-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .location-logo {
+    max-width: 110px;
+    flex-shrink: 0;
+  }
+
+  address {
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-ink-soft);
+    margin-top: -0.625rem;
+  }
+
+  .address-link {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .address-link:hover {
+    color: var(--color-green);
+  }
+
+  /* ── Photo Band ── */
+  .photo-band {
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+  }
+
+  .photo-band img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 35% calc(50% - 7px);
+  }
+
+  /* ── Volunteer Section ── */
+  .volunteer-section {
+    padding-block: var(--space-lg) calc(var(--space-lg) - 1rem);
+    background-color: var(--color-sage-mist);
+  }
+
+  .volunteer-inner {
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .volunteer-inner .label {
+    margin-bottom: 0.75rem;
+  }
+
+  .volunteer-inner h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .volunteer-inner p + p {
+    margin-top: 1rem;
+  }
+
+  .volunteer-inner .btn {
+    margin-top: 1.5rem;
+  }
+
+  /* ── Team Section ── */
+  .team-section {
+    padding-block: var(--space-lg);
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-sage-mist);
+  }
+
+  .team-section .label {
+    margin-bottom: 0.75rem;
+  }
+
+  .team-section h2 {
+    margin-bottom: 2rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    padding: var(--space-sm) 0 var(--space-md);
+    justify-items: center;
+  }
+
+  .pennant-wrapper {
+    position: relative;
+    padding-top: 16px;
+  }
+
+  .pennant-wrapper::before,
+  .pennant-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    width: 1.5px;
+    height: 13px;
+    background: var(--color-sage);
+    opacity: 0.5;
+  }
+
+  .pennant-wrapper::before {
+    left: calc(50% - 40px);
+    transform: rotate(-20deg);
+  }
+
+  .pennant-wrapper::after {
+    left: calc(50% + 39px);
+    transform: rotate(20deg);
+  }
+
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 2rem 1.25rem 3rem;
+    background: linear-gradient(
+      to bottom,
+      var(--color-sage) 0px,
+      var(--color-sage) 5px,
+      var(--color-cream) 5px
+    );
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), 50% 100%, 0 calc(100% - 28px));
+  }
+
+  .team-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--color-green);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--color-gold);
+  }
+
+  .team-photo-wrap {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .team-avatar-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pennant-wrapper:first-child .team-avatar-photo {
+    object-position: 40% 65%;
+    transform: scale(1.5);
+  }
+
+  .pennant-wrapper:nth-child(2) .team-avatar-photo {
+    object-position: 52% 55%;
+    transform: scale(1.5);
+  }
+
+  .pennant-wrapper:nth-child(4) .team-avatar-photo {
+    object-position: 55% 50%;
+  }
+
+  .pennant-wrapper:nth-child(5) .team-avatar-photo {
+    object-position: 37% 15%;
+  }
+
+  .team-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    align-items: center;
+  }
+
+  .team-info h3 {
+    font-family: 'Barlow Condensed', var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 300;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-green);
+    margin-bottom: 0.125rem;
+  }
+
+  .team-role {
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .team-bio {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-link {
+    font-size: 0.8125rem;
+    color: var(--color-gold);
+    text-decoration: none;
+    display: block;
+  }
+
+  .contact-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Tablet ── */
+  @media (max-width: 1023px) {
+    .team-grid {
+      grid-template-columns: repeat(3, minmax(0, 240px));
+      justify-content: center;
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .photo-band {
+      height: 200px;
+    }
+
+    .volunteer-section {
+      padding-block: var(--space-md);
+    }
+
+    .location-row {
+      flex-wrap: wrap;
+    }
+
+    .location-logo {
+      max-width: 80px;
+    }
+
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 200px));
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .team-card {
+      padding: 1.5rem 1rem 2.5rem;
+    }
+
+    .team-info h3 {
+      font-size: 1.125rem;
+    }
+
+    .team-bio {
+      font-size: 0.75rem;
+    }
+  }
+</style>

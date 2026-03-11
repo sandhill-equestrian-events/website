@@ -1,0 +1,206 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const sponsors = [
+  { name: "CWD", url: "https://www.cwdsellier.com/", logo: "/images/cwd-logo.png" },
+  { name: "Victoria Dye Equestrian", url: "https://www.victoriadyeequestrian.com/", logo: "/images/dye-logo.png" },
+  { name: "Leap of Faith Equestrian", url: "https://www.leapoffaitheq.com", logo: "/images/lof-logo.png", maxHeight: "240px" },
+  { name: "Don DeFranco Town & Country Group", url: "https://www.dondefranco.com/", logo: "/images/defranco-logo.png" },
+];
+---
+
+<Layout title="Sponsors — Sand Hill Equestrian Events" description="Meet the sponsors who make Sand Hill Equestrian Events possible. Learn about partnership opportunities for the 2026 season." image="/images/cwd-awards-photo.jpg">
+  <Nav />
+
+  <main id="main-content">
+  <section class="page-hero">
+    <div class="container">
+      <p class="label">Our Partners</p>
+      <h1>Sponsors</h1>
+      <p class="page-sub">
+        The generous support of our sponsors makes everything possible.
+        Thank you to our 2026 partners.
+      </p>
+    </div>
+  </section>
+
+  <section class="sponsors-section gold-divider">
+    <div class="container">
+      <div class="sponsors-grid fade-in-stagger">
+        {sponsors.map((s) => (
+          <a href={s.url} target="_blank" rel="noopener noreferrer" class="sponsor-card fade-in">
+            {s.logo
+              ? <img src={s.logo} alt={s.name} class="sponsor-logo" style={s.maxHeight ? `max-height: ${s.maxHeight}` : ''} loading="lazy" />
+              : <div class="sponsor-logo-placeholder"></div>
+            }
+            <span class="sr-only">(opens in new tab)</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="become-sponsor-row fade-in">
+        <div class="become-sponsor">
+          <p class="label">Partner With Us</p>
+          <h2>Become a Sponsor</h2>
+          <p>
+            The support of our sponsors is vital to Sand Hill Equestrian Events.
+            Your partnership allows us to continually enhance the show experience,
+            providing top-quality atmospheres for our riders, their families,
+            spectators, and partners.
+          </p>
+          <p>
+            Elevate your brand's visibility and connect with a passionate equestrian
+            community. We offer various sponsorship packages designed to provide
+            valuable exposure.
+          </p>
+          <a href="/sponsorship-packages.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Sponsorship Packages <span class="sr-only">(opens in new tab)</span></a>
+        </div>
+        <img src="/images/cwd-awards-photo.jpg" alt="CWD award presentation" class="sponsor-feature-photo" loading="lazy" />
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-green);
+    padding-block: var(--space-lg);
+  }
+
+  .page-hero .label {
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-hero h1 {
+    color: var(--color-white);
+    margin-bottom: 1rem;
+  }
+
+  .page-sub {
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 52ch;
+    font-size: 1.0625rem;
+  }
+
+  .sponsors-section {
+    padding-block: var(--space-lg);
+    background-color: var(--color-cream);
+  }
+
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .sponsor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .sponsor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .sponsor-logo {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+  }
+
+  .sponsor-logo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/2;
+    background-color: var(--color-sage-mist);
+    border-radius: 2px;
+  }
+
+  .become-sponsor-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .become-sponsor {
+    background-color: var(--color-sage-mist);
+    padding: var(--space-lg);
+    border-radius: 4px;
+  }
+
+  .sponsor-feature-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 46% center;
+    border-radius: 4px;
+  }
+
+  .become-sponsor .label {
+    margin-bottom: 0.75rem;
+  }
+
+  .become-sponsor h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .become-sponsor p + p {
+    margin-top: 1rem;
+  }
+
+  .become-sponsor .btn {
+    margin-top: 1.5rem;
+  }
+
+
+
+  /* ── Tablet ── */
+  @media (max-width: 1023px) {
+    .sponsors-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .become-sponsor-row {
+      grid-template-columns: 1fr;
+    }
+
+    .sponsor-feature-photo {
+      height: 300px;
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .sponsors-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .become-sponsor-row {
+      grid-template-columns: 1fr;
+    }
+
+    .become-sponsor {
+      padding: var(--space-md);
+    }
+
+    .sponsor-feature-photo {
+      height: 250px;
+    }
+  }
+</style>

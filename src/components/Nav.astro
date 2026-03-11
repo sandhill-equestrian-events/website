@@ -1,0 +1,313 @@
+---
+const navLinks = [
+  { label: "Sponsors", href: "/sponsors" },
+  { label: "News", href: "/news" },
+  { label: "Contact", href: "/contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo" aria-label="Sand Hill Equestrian Events — Home">
+      <span class="logo-main">Sand Hill</span>
+      <span class="logo-sub">Equestrian Events</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+        <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="0" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="0" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <ul class="nav-links">
+      <!-- Compete dropdown -->
+      <li class="dropdown">
+        <button class="nav-link dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Compete
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="https://www.ringradar.com/1546/show-info" target="_blank" rel="noopener noreferrer">
+              Woodside Show Series
+              <span class="sr-only">(opens in new tab)</span>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={["nav-link", { active: currentPath === link.href }]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('nav');
+  const dropdownTrigger = document.querySelector('.dropdown-trigger');
+  const dropdown = document.querySelector('.dropdown');
+
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  // Close on link click (mobile)
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav?.classList.remove('nav-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Open menu');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Update dropdown aria-expanded on hover/focus (desktop)
+  if (dropdown && dropdownTrigger) {
+    const updateExpanded = () => {
+      const isOpen = dropdown.matches(':hover, :focus-within');
+      dropdownTrigger.setAttribute('aria-expanded', String(isOpen));
+    };
+    dropdown.addEventListener('mouseenter', updateExpanded);
+    dropdown.addEventListener('mouseleave', updateExpanded);
+    dropdown.addEventListener('focusin', updateExpanded);
+    dropdown.addEventListener('focusout', () => setTimeout(updateExpanded, 0));
+  }
+</script>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-green);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1.125rem;
+  }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    text-decoration: none;
+    gap: 0.2rem;
+  }
+
+  .logo-main {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .logo-sub {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+  }
+
+  /* ── Hamburger toggle ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .nav-toggle:hover {
+    color: var(--color-white);
+  }
+
+  /* ── Nav links ── */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    transition: color 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-white);
+    background-color: rgba(255,255,255,0.08);
+  }
+
+  .nav-link.active {
+    color: var(--color-gold);
+  }
+
+  /* ── Dropdown (desktop) ── */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    padding: 0.5rem 0 0;
+    background-color: transparent;
+    min-width: 220px;
+  }
+
+  .dropdown-menu li:first-child {
+    background-color: var(--color-white);
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .dropdown:hover .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.875rem 1.125rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: background-color 0.15s, color 0.15s;
+  }
+
+  .dropdown-menu a:hover {
+    background-color: var(--color-sage-mist);
+    color: var(--color-green);
+  }
+
+  .dropdown-menu li {
+    list-style: none;
+  }
+
+  .dropdown-menu svg {
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 1023px) {
+    .nav-toggle {
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--color-green);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 0;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+    }
+
+    nav.nav-open .nav-links {
+      max-height: 80vh;
+      opacity: 1;
+      padding: 0.5rem 0 1rem;
+    }
+
+    .nav-link {
+      padding: 0.875rem var(--space-md);
+      border-radius: 0;
+      font-size: 0.9375rem;
+    }
+
+    /* Mobile dropdown: inline expand instead of absolute */
+    .dropdown {
+      position: static;
+    }
+
+    .dropdown-menu {
+      display: block;
+      position: static;
+      min-width: 0;
+      padding: 0;
+      background-color: transparent;
+    }
+
+    .dropdown-menu li:first-child {
+      background-color: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+    }
+
+    .dropdown-menu a {
+      color: rgba(255,255,255,0.6);
+      padding: 0.625rem var(--space-md) 0.625rem calc(var(--space-md) + 1rem);
+      font-size: 0.8125rem;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: rgba(255,255,255,0.05);
+      color: var(--color-white);
+    }
+  }
+</style>

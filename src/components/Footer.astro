@@ -1,0 +1,217 @@
+---
+---
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="footer-logo-main">Sand Hill</p>
+      <p class="footer-logo-sub">Equestrian Events</p>
+      <p class="footer-tagline">Growing the horse community through premier unrated hunter/jumper and dressage shows in Northern California.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="label footer-heading">Contacts</p>
+      <ul>
+        <li>
+          <strong>Molly Kaster</strong>
+          <span>Owner &amp; Show Manager</span>
+          <a href="tel:4082029903">(408) 202-9903</a>
+        </li>
+        <li>
+          <strong>Elizabeth Schaffernoth</strong>
+          <span>Show Secretary</span>
+        </li>
+        <li>
+          <strong>Charlotte Holt</strong>
+          <span>Creative &amp; Operations</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="label footer-heading">Email</p>
+      <a href="mailto:entries.woodsideschoolingshows@gmail.com" class="footer-email">
+        entries.woodsideschoolingshows@gmail.com
+      </a>
+
+      <p class="label footer-heading footer-follow">Follow Along</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/woodsideschoolingshows/" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in new tab)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/woodsideshowseries/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in new tab)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} Sand Hill Equestrian Events. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    padding-top: var(--space-lg);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
+
+  .footer-logo-main {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-white);
+    line-height: 1;
+  }
+
+  .footer-logo-sub {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    max-width: 28ch;
+  }
+
+  .footer-heading {
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-col li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .footer-col strong {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-white);
+  }
+
+  .footer-col span {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .footer-col a {
+    font-size: 0.8125rem;
+    color: var(--color-gold);
+    text-decoration: none;
+  }
+
+  .footer-col a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-email {
+    font-size: 0.8125rem;
+    color: var(--color-gold);
+    word-break: break-all;
+  }
+
+  .footer-follow {
+    margin-top: 1.5rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-social a {
+    font-size: 0.8125rem;
+    color: var(--color-gold);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: var(--color-white);
+    transform: scale(1.15);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-block: 1.25rem;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ── Tablet ── */
+  @media (max-width: 1023px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      text-align: center;
+    }
+
+    .footer-tagline {
+      max-width: none;
+    }
+
+    .footer-col ul {
+      align-items: center;
+    }
+
+    .footer-col li {
+      align-items: center;
+    }
+
+    .footer-social {
+      justify-content: center;
+    }
+
+    .footer-bottom {
+      text-align: center;
+    }
+  }
+</style>
